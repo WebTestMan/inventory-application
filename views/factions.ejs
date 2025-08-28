@@ -7,11 +7,15 @@
   <body>
     <h1 class="page-title"><%= title %></h1>
     <div>
+      <a href="/">Home</a>
       <a href="/categories">View all Categories</a>
-      <a href="/factions">View all Factions</a>
     </div>
 
-    <div><h3>All Characters</h3></div>
-    <%- include("characterTable", {characters : characters}) %>
+    <div><h3>Factions</h3></div>
+    <ol>
+      <% factions.forEach(faction =>{%>
+      <li><%= faction.factionname %></li>
+      <% }) %>
+    </ol>
   </body>
 </html>

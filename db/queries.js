@@ -6,6 +6,20 @@ async function getAllTransformers() {
   return rows;
 }
 
+async function getAllCategories() {
+  const { rows } = await pool.query("SELECT * FROM Category");
+
+  return rows;
+}
+
+async function getAllFactions() {
+  const { rows } = await pool.query("SELECT * FROM Faction");
+
+  return rows;
+}
+
 module.exports = {
   getAllTransformers,
+  getAllCategories,
+  getAllFactions,
 };
