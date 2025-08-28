@@ -1,0 +1,16 @@
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Faction</th>
+    <th>Category</th>
+  </tr>
+  <% characters.forEach(element=> { %>
+  <tr>
+    <td><%= element.id %></td>
+    <td><%= element.charactername %></td>
+    <td><%= element.factionname %></td>
+    <td><%= element.categoryname %></td>
+  </tr>
+  <% })%>
+</table>
