@@ -15,8 +15,25 @@ async function getFactions(req, res) {
   res.render("factions", { title: "Factions", factions: factions });
 }
 
+async function addCharacterGET(req, res) {
+  res.render("addCharacter", { title: "Add Character" });
+}
+
+async function addCharacterPOST(req, res) {
+  const character = {
+    characterName: req.body.characterName,
+    factionName: req.body.factionName,
+    categoryName: req.body.categoryName,
+  };
+  console.log(`Username to be added ${character}`);
+  await db.addCharacter(character);
+  res.redirect("/");
+}
+
 module.exports = {
   getCharacters,
   getCategories,
   getFactions,
+  addCharacterGET,
+  addCharacterPOST,
 };

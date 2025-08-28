@@ -18,8 +18,20 @@ async function getAllFactions() {
   return rows;
 }
 
+async function addCharacter(newCharacter) {
+  await pool.query(
+    "INSERT INTO Character ( characterName, factionName, categoryName) VALUES ($1, $2, $3)",
+    [
+      newCharacter.characterName,
+      newCharacter.factionName,
+      newCharacter.categoryName,
+    ]
+  );
+}
+
 module.exports = {
   getAllTransformers,
   getAllCategories,
   getAllFactions,
+  addCharacter,
 };
