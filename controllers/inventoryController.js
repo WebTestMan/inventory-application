@@ -1,4 +1,10 @@
-exports.getUsernames = async (req, res) => {
-  const usernames = await db.getAllUsernames();
-  res.render("index", { title: "Homepage", usernames: usernames });
+const db = require("../db/queries");
+
+async function getCharacters(req, res) {
+  const characters = await db.getAllTransformers();
+  res.render("index", { title: "Homepage", characters: characters });
+}
+
+module.exports = {
+  getCharacters,
 };
