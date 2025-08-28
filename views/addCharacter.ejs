@@ -15,11 +15,25 @@
         required
       /><br />
 
-      <label for="factionName">Faction: </label>
-      <input type="text" name="factionName" id="factionName" required /><br />
+      <label for="categoryName">Choose a category:</label>
+      <select id="categoryName" name="categoryName">
+        <% categories.forEach(category =>{%>
+        <option value="<%= category.categoryname %>">
+          <%= category.categoryname %>
+        </option>
+        <% }) %>
+      </select>
+      <br />
 
-      <label for="categoryName">Category: </label>
-      <input type="text" name="categoryName" id="categoryName" required /><br />
+      <label for="factionName">Choose a faction:</label>
+      <select id="factionName" name="factionName">
+        <% factions.forEach(faction =>{%>
+        <option value="<%= faction.factionname %>">
+          <%= faction.factionname %>
+        </option>
+        <% }) %>
+      </select>
+      <br />
 
       <button type="add">Add Character</button>
     </form>

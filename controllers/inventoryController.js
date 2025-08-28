@@ -16,7 +16,13 @@ async function getFactions(req, res) {
 }
 
 async function addCharacterGET(req, res) {
-  res.render("addCharacter", { title: "Add Character" });
+  const categories = await db.getAllCategories();
+  const factions = await db.getAllFactions();
+  res.render("addCharacter", {
+    title: "Add Character",
+    categories: categories,
+    factions: factions,
+  });
 }
 
 async function addCharacterPOST(req, res) {
