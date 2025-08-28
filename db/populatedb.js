@@ -2,33 +2,36 @@ const { Client } = require("pg");
 require("dotenv").config();
 
 const SQL = `
-CREATE TABLE IF NOT EXISTS category (
-  id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  categoryName VARCHAR ( 255 )
+CREATE TABLE IF NOT EXISTS Category (
+   categoryName VARCHAR ( 255 ) PRIMARY KEY
 );
 
-INSERT INTO category (categoryName) 
+INSERT INTO Category (categoryName) 
 VALUES
-  ('Land');
+  ('Land'),
+  ('Air');
 
-CREATE TABLE IF NOT EXISTS faction (
-  id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  factionName VARCHAR ( 255 )
+
+CREATE TABLE IF NOT EXISTS Faction (
+  factionName VARCHAR ( 255 ) PRIMARY KEY
 );
 
-INSERT INTO faction (factionName) 
+INSERT INTO Faction (factionName) 
 VALUES
-  ('Autobot');
+  ('Autobot'),
+  ('Decepticon');
 
-CREATE TABLE IF NOT EXISTS character ( 
+CREATE TABLE IF NOT EXISTS Character (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
   characterName VARCHAR ( 255 ),
-  factionName VARCHAR ( 255 )
+  factionName VARCHAR ( 255 ) REFERENCES Faction(factionName),
+  categoryName VARCHAR ( 255 ) REFERENCES Category(categoryName)
   );
 
-  INSERT INTO character (characterName, factionName) 
+INSERT INTO Character (characterName, factionName, categoryName)
 VALUES
-  ('Hot Rod', 'Autobot');
+  ('Hot Rod', 'Autobot', 'Land'),
+  ('Scourge', 'Decepticon','Air');
 `;
 
 async function main() {
