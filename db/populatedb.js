@@ -1,25 +1,40 @@
-#! /usr/bin/env node
-
 const { Client } = require("pg");
+require("dotenv").config();
 
 const SQL = `
-CREATE TABLE IF NOT EXISTS usernames (
+CREATE TABLE IF NOT EXISTS category (
   id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-  username VARCHAR ( 255 )
+  categoryName VARCHAR ( 255 )
 );
 
-INSERT INTO usernames (username) 
+INSERT INTO category (categoryName) 
 VALUES
-  ('Bryan'),
-  ('Odin'),
-  ('Damon');
+  ('Land');
+
+CREATE TABLE IF NOT EXISTS faction (
+  id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  factionName VARCHAR ( 255 )
+);
+
+INSERT INTO faction (factionName) 
+VALUES
+  ('Autobot');
+
+CREATE TABLE IF NOT EXISTS character ( 
+  id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+  characterName VARCHAR ( 255 ),
+  factionName VARCHAR ( 255 )
+  );
+
+  INSERT INTO character (characterName, factionName) 
+VALUES
+  ('Hot Rod', 'Autobot');
 `;
 
 async function main() {
   console.log("seeding...");
   const client = new Client({
-    connectionString:
-      "postgresql://mgh@localhost:5432/top_users",
+    connectionString: process.env.CONNECTION,
   });
   await client.connect();
   await client.query(SQL);
