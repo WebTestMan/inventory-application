@@ -29,9 +29,16 @@ async function addCharacter(newCharacter) {
   );
 }
 
+async function deleteCharacter(characterToDelete) {
+  await pool.query("DELETE FROM Character WHERE characterName = $1", [
+    characterToDelete,
+  ]);
+}
+
 module.exports = {
   getAllTransformers,
   getAllCategories,
   getAllFactions,
   addCharacter,
+  deleteCharacter,
 };

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <h1 class="page-title"><%= title %></h1>
+    <div>
+      <a href="/categories">View all Categories</a>
+      <a href="/factions">View all Factions</a>
+      <a href="/add">Add Character</a>
+      <a href="/">Back to home</a>
+    </div>
+
+    <div><h3>Delete Character</h3></div>
+    <%- include("characterTable", {characters : characters}) %>
+    <form action="/delete" method="POST">
+      <label for="characterName">Choose a category:</label>
+      <select id="characterName" name="characterName">
+        <% characters.forEach(character =>{%>
+        <option value="<%= character.charactername %>">
+          <%= character.charactername %>
+        </option>
+        <% }) %>
+      </select>
+      <button type="delete">Delete</button>
+    </form>
+  </body>
+</html>

@@ -36,10 +36,28 @@ async function addCharacterPOST(req, res) {
   res.redirect("/");
 }
 
+async function deleteCharacterGET(req, res) {
+  const characters = await db.getAllTransformers();
+  res.render("deleteCharacter", {
+    title: "Delete Character",
+    characters: characters,
+  });
+}
+
+async function deleteCharacterPOST(req, res) {
+  const character = req.body.characterName;
+
+  console.log(`Character to be deleted ${character}`);
+  await db.deleteCharacter(character);
+  res.redirect("/");
+}
+
 module.exports = {
   getCharacters,
   getCategories,
   getFactions,
   addCharacterGET,
   addCharacterPOST,
+  deleteCharacterGET,
+  deleteCharacterPOST,
 };
